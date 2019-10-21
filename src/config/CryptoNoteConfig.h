@@ -41,23 +41,25 @@ namespace CryptoNote
         const size_t BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW_V3 = 11;
 
         // MONEY_SUPPLY - total number coins to be generated
-        const uint64_t MONEY_SUPPLY = UINT64_C(100000000000000);
+        const uint64_t MONEY_SUPPLY = UINT64_C(18400000000000);
 
-        const uint32_t ZAWY_DIFFICULTY_BLOCK_INDEX = 187000;
+        const uint32_t ZAWY_DIFFICULTY_BLOCK_INDEX = 0;
 
         const size_t ZAWY_DIFFICULTY_V2 = 0;
 
         const uint8_t ZAWY_DIFFICULTY_DIFFICULTY_BLOCK_VERSION = 3;
 
-        const uint64_t LWMA_2_DIFFICULTY_BLOCK_INDEX = 620000;
+        const uint64_t LWMA_2_DIFFICULTY_BLOCK_INDEX = 2;
 
-        const uint64_t LWMA_2_DIFFICULTY_BLOCK_INDEX_V2 = 700000;
+        const uint64_t LWMA_2_DIFFICULTY_BLOCK_INDEX_V2 = 3;
 
-        const uint64_t LWMA_2_DIFFICULTY_BLOCK_INDEX_V3 = 800000;
+        const uint64_t LWMA_2_DIFFICULTY_BLOCK_INDEX_V3 = 4;
 
-        const unsigned EMISSION_SPEED_FACTOR = 25;
+        const unsigned EMISSION_SPEED_FACTOR = 22;
 
         static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED_FACTOR");
+        
+        const uint64_t GENESIS_BLOCK_REWARD                          = UINT64_C(900000000000);
 
         const char GENESIS_COINBASE_TX_HEX[] =
             "010a01ff000188f3b501029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd088071210142694232c5b04151"
@@ -91,26 +93,26 @@ namespace CryptoNote
         /* This section defines our minimum and maximum mixin counts required for transactions */
         const uint64_t MINIMUM_MIXIN_V1 = 0;
 
-        const uint64_t MAXIMUM_MIXIN_V1 = 100;
+        const uint64_t MAXIMUM_MIXIN_V1 = 20;
 
-        const uint64_t MINIMUM_MIXIN_V2 = 7;
+        const uint64_t MINIMUM_MIXIN_V2 = 1;
 
-        const uint64_t MAXIMUM_MIXIN_V2 = 7;
+        const uint64_t MAXIMUM_MIXIN_V2 = 5;
 
         const uint64_t MINIMUM_MIXIN_V3 = 3;
 
-        const uint64_t MAXIMUM_MIXIN_V3 = 3;
+        const uint64_t MAXIMUM_MIXIN_V3 = 7;
 
         /* The heights to activate the mixin limits at */
-        const uint32_t MIXIN_LIMITS_V1_HEIGHT = 440000;
+        const uint32_t MIXIN_LIMITS_V1_HEIGHT = 15000;
 
-        const uint32_t MIXIN_LIMITS_V2_HEIGHT = 620000;
+        const uint32_t MIXIN_LIMITS_V2_HEIGHT = 500000;
 
-        const uint32_t MIXIN_LIMITS_V3_HEIGHT = 800000;
+        const uint32_t MIXIN_LIMITS_V3_HEIGHT = 1000000;
 
         /* The mixin to use by default with zedwallet and turtle-service */
         /* DEFAULT_MIXIN_V0 is the mixin used before MIXIN_LIMITS_V1_HEIGHT is started */
-        const uint64_t DEFAULT_MIXIN_V0 = 3;
+        const uint64_t DEFAULT_MIXIN_V0 = 1;
 
         const uint64_t DEFAULT_MIXIN_V1 = MAXIMUM_MIXIN_V1;
 
@@ -165,23 +167,23 @@ namespace CryptoNote
         /* 25 trillion atomic, or 250 billion TRTL -> Max supply / mixin+1 outputs */
         /* This is enforced on the daemon side. An output > 250 billion causes
          * an invalid block. */
-        const uint64_t MAX_OUTPUT_SIZE_NODE   = 250'000'000'000'00;
+        const uint64_t MAX_OUTPUT_SIZE_NODE   = 4'500'000'000'00;
 
         /* 100 billion atomic, or 1 billion TRTL */
         /* This is enforced on the client side. An output > 1 billion will not
          * be created in a transaction */
-        const uint64_t MAX_OUTPUT_SIZE_CLIENT = 1'000'000'000'00;
+        const uint64_t MAX_OUTPUT_SIZE_CLIENT = 500'000'000'00;
 
         const uint64_t MAX_OUTPUT_SIZE_HEIGHT = 2000000;
 
         /* For new projects forked from this code base, the values immediately below
            should be changed to 0 to prevent issues with transaction processing
            and other possible unexpected behavior */
-        const uint64_t TRANSACTION_SIGNATURE_COUNT_VALIDATION_HEIGHT = 1400000;
+        const uint64_t TRANSACTION_SIGNATURE_COUNT_VALIDATION_HEIGHT = 0;
 
-        const uint64_t BLOCK_BLOB_SHUFFLE_CHECK_HEIGHT = 1600000;
+        const uint64_t BLOCK_BLOB_SHUFFLE_CHECK_HEIGHT = 0;
 
-        const uint64_t TRANSACTION_INPUT_BLOCKTIME_VALIDATION_HEIGHT = 1600000;
+        const uint64_t TRANSACTION_INPUT_BLOCKTIME_VALIDATION_HEIGHT = 0;
 
         /* This describes how many blocks of "wiggle" room transactions have regarding
            when the outputs can be spent based on a reasonable belief that the outputs
@@ -207,11 +209,11 @@ namespace CryptoNote
 
         const uint32_t UPGRADE_HEIGHT_V3 = 2;
 
-        const uint32_t UPGRADE_HEIGHT_V4 = 350000; // Upgrade height for CN-Lite Variant 1 switch.
+        const uint32_t UPGRADE_HEIGHT_V4 = 3; // Upgrade height for CN-Lite Variant 1 switch.
 
-        const uint32_t UPGRADE_HEIGHT_V5 = 1200000; // Upgrade height for CN-Turtle Variant 2 switch.
+        const uint32_t UPGRADE_HEIGHT_V5 = 4; // Upgrade height for CN-Turtle Variant 2 switch.
 
-        const uint32_t UPGRADE_HEIGHT_V6 = 1800000; // Upgrade height for Chukwa switch.
+        const uint32_t UPGRADE_HEIGHT_V6 = 5; // Upgrade height for Chukwa switch.
 
         const uint32_t UPGRADE_HEIGHT_CURRENT = UPGRADE_HEIGHT_V6;
 
@@ -234,17 +236,10 @@ namespace CryptoNote
             1300000, // 8
             1400000, // 9
             1600000, // 10
-            1800000, // 11
-            2000000, // 12
-            2200000, // 13
-            2400000, // 14
-            2600000, // 15
-            2800000, // 16
-            3000000, // 17
         };
 
         /* MAKE SURE TO UPDATE THIS VALUE WITH EVERY MAJOR RELEASE BEFORE A FORK */
-        const uint64_t SOFTWARE_SUPPORTED_FORK_INDEX = 11;
+        const uint64_t SOFTWARE_SUPPORTED_FORK_INDEX = 7;
 
         const uint64_t FORK_HEIGHTS_SIZE = sizeof(FORK_HEIGHTS) / sizeof(*FORK_HEIGHTS);
 
@@ -272,7 +267,7 @@ namespace CryptoNote
         const char MINER_CONFIG_FILE_NAME[] = "miner_conf.json";
     } // namespace parameters
 
-    const char CRYPTONOTE_NAME[] = "TurtleCoin";
+    const char CRYPTONOTE_NAME[] = "Tickets";
 
     const uint8_t TRANSACTION_VERSION_1 = 1;
 
@@ -305,9 +300,9 @@ namespace CryptoNote
     const uint64_t BLOCKS_SYNCHRONIZING_DEFAULT_COUNT = 100; // by default, blocks count in blocks downloading
     const size_t COMMAND_RPC_GET_BLOCKS_FAST_MAX_COUNT = 1000;
 
-    const int P2P_DEFAULT_PORT = 11897;
+    const int P2P_DEFAULT_PORT = 27092;
 
-    const int RPC_DEFAULT_PORT = 11898;
+    const int RPC_DEFAULT_PORT = 27093;
 
     const int SERVICE_DEFAULT_PORT = 8070;
 
@@ -348,21 +343,17 @@ namespace CryptoNote
     const uint32_t DATABASE_DEFAULT_MAX_OPEN_FILES = 125; // 125 files
     const uint16_t DATABASE_DEFAULT_BACKGROUND_THREADS_COUNT = 4; // 4 DB threads
 
-    const char LATEST_VERSION_URL[] = "http://latest.turtlecoin.lol";
+    const char LATEST_VERSION_URL[] = "http://ticketszones.com";
 
-    const std::string LICENSE_URL = "https://github.com/turtlecoin/turtlecoin/blob/master/LICENSE";
+    const std::string LICENSE_URL = "https://github.com/ticketszones/tickets";
 
     const static boost::uuids::uuid CRYPTONOTE_NETWORK = {
-        {0xb5, 0x0c, 0x4a, 0x6c, 0xcf, 0x52, 0x57, 0x41, 0x65, 0xf9, 0x91, 0xa4, 0xb6, 0xc1, 0x43, 0xe9}};
+        {0xa3, 0x0b, 0x6e, 0x1c, 0xcf, 0x42, 0x57, 0x51, 0x43, 0xb9, 0x91, 0xa4, 0xa5, 0xc1, 0x31, 0xb3}};
 
     const char *const SEED_NODES[] = {
-        "206.189.142.142:11897", // rock
-        "145.239.88.119:11999", // cision
-        "142.44.242.106:11897", // tom
-        "165.227.252.132:11897", // iburnmycd
-        "148.251.178.238:11897", // hv
-        "45.32.138.7:11897", // extra
-        "46.214.70.196:11897", // CuveeRO
-        "91.239.237.54:11897" // CuveeCZ
+         "140.82.58.153:27092",
+         "140.82.21.218:27092",
+         "207.246.114.46:27092",
+         "45.63.65.75:27092",
     };
 } // namespace CryptoNote
