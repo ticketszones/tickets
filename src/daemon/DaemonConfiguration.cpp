@@ -51,7 +51,7 @@ namespace DaemonConfig
             "Output daemon version information",
             cxxopts::value<bool>()->default_value("false")->implicit_value("true"));
 
-        options.add_options("Genesis Block")(
+        options.add_options("Genesis Block")
                    ("genesis-block-reward-address", "Specify the address for any premine genesis block rewards", cxxopts::value<std::vector<std::string>>(), "<address>")
 
         options.add_options("Daemon")(
