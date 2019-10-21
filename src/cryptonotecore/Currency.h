@@ -505,6 +505,7 @@ namespace CryptoNote
         }
 
         Transaction generateGenesisTransaction();
+        Transaction generateGenesisTransaction(const std::vector<AccountPublicAddress>& targets);
 
         CurrencyBuilder &maxBlockNumber(uint32_t val)
         {
