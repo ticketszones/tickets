@@ -52,9 +52,7 @@ namespace DaemonConfig
             cxxopts::value<bool>()->default_value("false")->implicit_value("true"));
 
         options.add_options("Genesis Block")(
-            "print-genesis-tx",
-            "Print the genesis block transaction hex and exits",
-            cxxopts::value<bool>()->default_value("false")->implicit_value("true"));
+                   ("genesis-block-reward-address", "Specify the address for any premine genesis block rewards", cxxopts::value<std::vector<std::string>>(), "<address>")
 
         options.add_options("Daemon")(
             "c,config-file", "Specify the <path> to a configuration file", cxxopts::value<std::string>(), "<path>")(
@@ -188,6 +186,11 @@ namespace DaemonConfig
             if (cli.count("save-config") > 0)
             {
                 config.outputFile = cli["save-config"].as<std::string>();
+            }
+            
+            if (cli.count("genesis-block-reward-address") > 0)
+            {
+             config.genesisAwardAddresses = cli["genesis-block-reward-address"].as<std::vector<std::string>>();
             }
 
             if (cli.count("help") > 0)
