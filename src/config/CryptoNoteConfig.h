@@ -92,26 +92,26 @@ namespace CryptoNote
         /* This section defines our minimum and maximum mixin counts required for transactions */
         const uint64_t MINIMUM_MIXIN_V1 = 0;
 
-        const uint64_t MAXIMUM_MIXIN_V1 = 20;
+        const uint64_t MAXIMUM_MIXIN_V1 = 25;
 
-        const uint64_t MINIMUM_MIXIN_V2 = 1;
+        const uint64_t MINIMUM_MIXIN_V2 = 7;
 
-        const uint64_t MAXIMUM_MIXIN_V2 = 5;
+        const uint64_t MAXIMUM_MIXIN_V2 = 7;
 
         const uint64_t MINIMUM_MIXIN_V3 = 3;
 
-        const uint64_t MAXIMUM_MIXIN_V3 = 7;
+        const uint64_t MAXIMUM_MIXIN_V3 = 3;
 
         /* The heights to activate the mixin limits at */
-        const uint32_t MIXIN_LIMITS_V1_HEIGHT = 150000;
+        const uint32_t MIXIN_LIMITS_V1_HEIGHT = 400000;
 
-        const uint32_t MIXIN_LIMITS_V2_HEIGHT = 500000;
+        const uint32_t MIXIN_LIMITS_V2_HEIGHT = 600000;
 
-        const uint32_t MIXIN_LIMITS_V3_HEIGHT = 1000000;
+        const uint32_t MIXIN_LIMITS_V3_HEIGHT = 900000;
 
         /* The mixin to use by default with zedwallet and turtle-service */
         /* DEFAULT_MIXIN_V0 is the mixin used before MIXIN_LIMITS_V1_HEIGHT is started */
-        const uint64_t DEFAULT_MIXIN_V0 = 0;
+        const uint64_t DEFAULT_MIXIN_V0 = 3;
 
         const uint64_t DEFAULT_MIXIN_V1 = MAXIMUM_MIXIN_V1;
 
@@ -163,15 +163,12 @@ namespace CryptoNote
 
         const uint64_t MAX_EXTRA_SIZE_V2_HEIGHT = 1300000;
 
-        /* 25 trillion atomic, or 250 billion TRTL -> Max supply / mixin+1 outputs */
-        /* This is enforced on the daemon side. An output > 250 billion causes
-         * an invalid block. */
-        const uint64_t MAX_OUTPUT_SIZE_NODE   = 4'500'000'000'00;
+       const uint64_t MAX_OUTPUT_SIZE_NODE   = 250'000'000'000'00;
 
         /* 100 billion atomic, or 1 billion TRTL */
         /* This is enforced on the client side. An output > 1 billion will not
          * be created in a transaction */
-        const uint64_t MAX_OUTPUT_SIZE_CLIENT = 500'000'000'00;
+        const uint64_t MAX_OUTPUT_SIZE_CLIENT = 1'000'000'000'00;
 
         const uint64_t MAX_OUTPUT_SIZE_HEIGHT = 2000000;
 
@@ -224,7 +221,7 @@ namespace CryptoNote
 
         /* Block heights we are going to have hard forks at */
         const uint64_t FORK_HEIGHTS[] = {
-            187000, // 0
+            287000, // 0
             350000, // 1
             440000, // 2
             620000, // 3
