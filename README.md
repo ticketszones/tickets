@@ -41,7 +41,7 @@ If you are using Clang, you will need Clang 6.0 or higher. You will also need li
 - `export CC=gcc-8`
 - `export CXX=g++-8`
 - `git clone https://github.com/ticketszones/tickets.git`
-- `cd turtlecoin`
+- `cd tickets`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
@@ -120,7 +120,7 @@ The binaries will be in the `src` folder when you are complete.
 - `export CC=/usr/local/opt/llvm@8/bin/clang`
 - `export CXX=/usr/local/opt/llvm@8/bin/clang++`
 - `git clone https://github.com/ticketszones/tickets.git`
-- `cd turtlecoin`
+- `cd tickets`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
