@@ -40,7 +40,7 @@ If you are using Clang, you will need Clang 6.0 or higher. You will also need li
 - `sudo pip install cmake`
 - `export CC=gcc-8`
 - `export CXX=g++-8`
-- `git clone -b master --single-branch https://github.com/turtlecoin/turtlecoin`
+- `git clone https://github.com/ticketszones/tickets.git`
 - `cd turtlecoin`
 - `mkdir build`
 - `cd build`
@@ -50,7 +50,7 @@ If you are using Clang, you will need Clang 6.0 or higher. You will also need li
 The binaries will be in the `src` folder when you are complete.
 
 - `cd src`
-- `./TurtleCoind --version`
+- `./Ticketscoind --version`
 
 ##### Ubuntu, using Clang
 
@@ -74,8 +74,8 @@ You need to modify the below command for your version of ubuntu - see https://ap
 - `sudo pip install cmake`
 - `export CC=clang-6.0`
 - `export CXX=clang++-6.0`
-- `git clone -b master --single-branch https://github.com/turtlecoin/turtlecoin`
-- `cd turtlecoin`
+- `git clone https://github.com/ticketszones/tickets.git`
+- `cd tickets`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
@@ -84,7 +84,7 @@ You need to modify the below command for your version of ubuntu - see https://ap
 The binaries will be in the `src` folder when you are complete.
 
 - `cd src`
-- `./TurtleCoind --version`
+- `./Ticketscoind --version`
 
 ##### Generic Linux
 
@@ -93,8 +93,8 @@ Ensure you have the dependencies listed above.
 If you want to use clang, ensure you set the environment variables `CC` and `CXX`.
 See the ubuntu instructions for an example.
 
-- `git clone -b master --single-branch https://github.com/turtlecoin/turtlecoin`
-- `cd turtlecoin`
+- `git clone https://github.com/ticketszones/tickets.git`
+- `cd tickets`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
@@ -103,7 +103,7 @@ See the ubuntu instructions for an example.
 The binaries will be in the `src` folder when you are complete.
 
 - `cd src`
-- `./TurtleCoind --version`
+- `./Ticketscoind --version`
 
 #### OSX/Apple, using Clang
 
@@ -119,7 +119,7 @@ The binaries will be in the `src` folder when you are complete.
 - `ln -s /usr/local/opt/llvm@8 /usr/local/opt/llvm`
 - `export CC=/usr/local/opt/llvm@8/bin/clang`
 - `export CXX=/usr/local/opt/llvm@8/bin/clang++`
-- `git clone -b master --single-branch https://github.com/turtlecoin/turtlecoin`
+- `git clone https://github.com/ticketszones/tickets.git`
 - `cd turtlecoin`
 - `mkdir build`
 - `cd build`
@@ -129,7 +129,7 @@ The binaries will be in the `src` folder when you are complete.
 The binaries will be in the `src` folder when you are complete.
 
 - `cd src`
-- `./TurtleCoind --version`
+- `./Ticketscoind --version`
 
 #### Windows
 
@@ -150,7 +150,7 @@ You can build for 32-bit or 64-bit Windows. **If you're not sure, pick 64-bit.**
 
 For 64-bit:
 - From the start menu, open 'x64 Native Tools Command Prompt for VS 2019'.
-- `cd <your_turtlecoin_directory>`
+- `cd <your_tickets_directory>`
 - `mkdir build`
 - `cd build`
 - `cmake -G "Visual Studio 16 2019" -A x64 .. -DBOOST_ROOT=C:/local/boost_1_69_0`
@@ -158,7 +158,7 @@ For 64-bit:
 
 For 32-bit:
 - From the start menu, open 'x86 Native Tools Command Prompt for VS 2019'.
-- `cd <your_turtlecoin_directory>`
+- `cd <your_tickets_directory>`
 - `mkdir build`
 - `cd build`
 - `cmake -G "Visual Studio 16 2019" -A Win32 .. -DBOOST_ROOT=C:/local/boost_1_69_0`
@@ -168,7 +168,7 @@ The binaries will be in the `src/Release` folder when you are complete.
 
 - `cd src`
 - `cd Release`
-- `TurtleCoind.exe --version`
+- `Ticketscoind.exe --version`
 
 #### Thanks
 Cryptonote Developers, Bytecoin Developers, Monero Developers, Forknote Project, TurtleCoin Community
