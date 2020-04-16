@@ -123,7 +123,7 @@ namespace CryptoNote
 
         const uint64_t DEFAULT_DUST_THRESHOLD_V2 = UINT64_C(0);
 
-        const uint32_t DUST_THRESHOLD_V2_HEIGHT = MIXIN_LIMITS_V2_HEIGHT;
+        const uint32_t DUST_THRESHOLD_V2_HEIGHT = MIXIN_LIMITS_V2_HEIGHTf;
 
         const uint32_t FUSION_DUST_THRESHOLD_HEIGHT_V2 = 800000;
 
@@ -161,7 +161,7 @@ namespace CryptoNote
 
         const uint64_t MAX_EXTRA_SIZE_V2 = 1024;
 
-        const uint64_t MAX_EXTRA_SIZE_V2_HEIGHT = 1300000;
+        const uint64_t MAX_EXTRA_SIZE_V2_HEIGHT = 300000;
 
        const uint64_t MAX_OUTPUT_SIZE_NODE   = 250'000'000'000'00;
 
@@ -170,7 +170,7 @@ namespace CryptoNote
          * be created in a transaction */
         const uint64_t MAX_OUTPUT_SIZE_CLIENT = 1'000'000'000'00;
 
-        const uint64_t MAX_OUTPUT_SIZE_HEIGHT = 2000000;
+        const uint64_t MAX_OUTPUT_SIZE_HEIGHT = 400000;
 
         /* For new projects forked from this code base, the values immediately below
            should be changed to 0 to prevent issues with transaction processing
