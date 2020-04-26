@@ -123,7 +123,7 @@ namespace CryptoNote
 
         const uint64_t DEFAULT_DUST_THRESHOLD_V2 = UINT64_C(0);
 
-        const uint32_t DUST_THRESHOLD_V2_HEIGHT = MIXIN_LIMITS_V2_HEIGHTf;
+        const uint32_t DUST_THRESHOLD_V2_HEIGHT = MIXIN_LIMITS_V2_HEIGHT;
 
         const uint32_t FUSION_DUST_THRESHOLD_HEIGHT_V2 = 800000;
 
