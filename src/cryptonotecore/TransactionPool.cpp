@@ -112,6 +112,23 @@ namespace CryptoNote
         logger(Logging::DEBUGGING) << "transaction " << hash << " removed from pool";
         return true;
     }
+    
+     size_t TransactionPool::getFusionTransactionCount() const
+    {
+        size_t fusionTransactionCount = 0;
+
+        for (const auto &transaction : transactionCostIndex)
+        {
+            size_t transactionFee = transaction.cachedTransaction.getTransactionFee();
+
+            if (transactionFee == 0)
+            {
+                fusionTransactionCount++;
+            }
+        }
+
+        return fusionTransactionCount;
+    }
 
     size_t TransactionPool::getTransactionCount() const
     {
