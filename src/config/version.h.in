@@ -3,11 +3,11 @@
 
 #define PROJECT_NAME "Tickets"
 #define PROJECT_SITE "http://www.ticketszones.com"
-#define PROJECT_COPYRIGHT "Copyright 2018-2019, The TurtleCoin Developers, Tickets Developers"
+#define PROJECT_COPYRIGHT "Copyright 2020-2020, The TurtleCoin Developers, Tickets Developers"
 #define APP_VER_MAJOR 0
-#define APP_VER_MINOR 1
+#define APP_VER_MINOR 2
 #define APP_VER_REV 0
-#define APP_VER_BUILD 2
+#define APP_VER_BUILD 3
 
 #define BUILD_COMMIT_ID "@VERSION@"
 #define PROJECT_VERSION STR(APP_VER_MAJOR) "." STR(APP_VER_MINOR) "." STR(APP_VER_REV)

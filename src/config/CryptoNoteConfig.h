@@ -1,7 +1,8 @@
 // Copyright (c) 2012-2017, The CryptoNote developers, The Bytecoin developers
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2018-2019, The TurtleCoin Developers
-// Copyright (c) 2018-2019, The Tickets Developers
+// Copyright (c) 2018-2020, The TurtleCoin Developers
+// Copyright (c) 2020-2020, The Tickets Developers
+//
 // Please see the included LICENSE file for more information.
 
 #pragma once
@@ -87,7 +88,23 @@ namespace CryptoNote
 
         const size_t CRYPTONOTE_DISPLAY_DECIMAL_POINT = 2;
 
+        /* TODO: Remove? */
         const uint64_t MINIMUM_FEE = UINT64_C(10);
+
+        /* Fee per byte is rounded up in chunks. This helps makes estimates
+         * more accurate. It's suggested to make this a power of two, to relate
+         * to the underlying storage cost / page sizes for storing a transaction. */
+        const uint64_t FEE_PER_BYTE_CHUNK_SIZE = 256;
+
+        /* Fee to charge per byte of transaction. Will be applied in chunks, see
+         * above. This value comes out to 1.953125. We use this value instead of
+         * something like 2 because it makes for pretty resulting fees
+         * - 5 TRTL vs 5.12 TRTL. You can read this as.. the fee per chunk
+         * is 500 atomic units. The fee per byte is 500 / chunk size. */
+        const double MINIMUM_FEE_PER_BYTE_V1 = 1000.00 / FEE_PER_BYTE_CHUNK_SIZE; // 1 chunk = 10 TKTS --> 1kB = 40 TKTS
+        
+        /* Height for our first fee to byte change to take effect. */
+        const uint64_t MINIMUM_FEE_PER_BYTE_V1_HEIGHT = 643000;
 
         /* This section defines our minimum and maximum mixin counts required for transactions */
         const uint64_t MINIMUM_MIXIN_V1 = 0;
@@ -98,16 +115,16 @@ namespace CryptoNote
 
         const uint64_t MAXIMUM_MIXIN_V2 = 7;
 
-        const uint64_t MINIMUM_MIXIN_V3 = 5;
+        const uint64_t MINIMUM_MIXIN_V3 = 0;
 
-        const uint64_t MAXIMUM_MIXIN_V3 = 7;
+        const uint64_t MAXIMUM_MIXIN_V3 = 3;
 
         /* The heights to activate the mixin limits at */
         const uint32_t MIXIN_LIMITS_V1_HEIGHT = 400000;
 
         const uint32_t MIXIN_LIMITS_V2_HEIGHT = 600000;
 
-        const uint32_t MIXIN_LIMITS_V3_HEIGHT = 900000;
+        const uint32_t MIXIN_LIMITS_V3_HEIGHT = 643000;
 
         /* The mixin to use by default with zedwallet and turtle-service */
         /* DEFAULT_MIXIN_V0 is the mixin used before MIXIN_LIMITS_V1_HEIGHT is started */
@@ -117,7 +134,7 @@ namespace CryptoNote
 
         const uint64_t DEFAULT_MIXIN_V2 = MAXIMUM_MIXIN_V2;
 
-        const uint64_t DEFAULT_MIXIN_V3 = MAXIMUM_MIXIN_V3;
+        const uint64_t DEFAULT_MIXIN_V3 = 1;
 
         const uint64_t DEFAULT_DUST_THRESHOLD = UINT64_C(10);
 
@@ -125,7 +142,7 @@ namespace CryptoNote
 
         const uint32_t DUST_THRESHOLD_V2_HEIGHT = MIXIN_LIMITS_V2_HEIGHT;
 
-        const uint32_t FUSION_DUST_THRESHOLD_HEIGHT_V2 = 800000;
+        const uint32_t FUSION_DUST_THRESHOLD_HEIGHT_V2 = 643000;
 
         const uint64_t EXPECTED_NUMBER_OF_BLOCKS_PER_DAY = 24 * 60 * 60 / DIFFICULTY_TARGET;
 
@@ -163,7 +180,10 @@ namespace CryptoNote
 
         const uint64_t MAX_EXTRA_SIZE_V2_HEIGHT = 300000;
 
-       const uint64_t MAX_OUTPUT_SIZE_NODE   = 250'000'000'000'00;
+        /* 25 trillion atomic, or 250 billion TRTL -> Max supply / mixin+1 outputs */
+        /* This is enforced on the daemon side. An output > 250 billion causes
+         * an invalid block. */
+        const uint64_t MAX_OUTPUT_SIZE_NODE   = 250'000'000'000'00;
 
         /* 100 billion atomic, or 1 billion TRTL */
         /* This is enforced on the client side. An output > 1 billion will not
@@ -200,12 +220,16 @@ namespace CryptoNote
         const size_t FUSION_TX_MIN_INPUT_COUNT = 12;
 
         const size_t FUSION_TX_MIN_IN_OUT_COUNT_RATIO = 4;
-        
+
         /* This sets the maximum number of fusion transactions that can be present in the pool
-            at any given time. Incoming fusion transactions that attempt to exceed this limit
-            will be rejected from the pool and will not be added. This mechanism is in place
-            to help curtail fusion transaction spam. */
-        const size_t   FUSION_TX_MAX_POOL_COUNT 					 = 50;
+           at any given time. Incoming fusion transactions that attempt to exceed this limit
+           will be rejected from the pool and will not be added. This mechanism is in place
+           to help curtail fusion transaction spam. */
+        const size_t FUSION_TX_MAX_POOL_COUNT = 50;
+
+        const size_t NORMAL_TX_MAX_OUTPUT_COUNT_V1 = 90;
+
+        const size_t NORMAL_TX_MAX_OUTPUT_COUNT_V1_HEIGHT = 643000;
 
         const uint32_t UPGRADE_HEIGHT_V2 = 1;
 
@@ -231,13 +255,20 @@ namespace CryptoNote
             350000, // 1
             440000, // 2
             620000, // 3
-            700000, // 4
+            643000, // 4
             800000, // 5
             1000000, // 6
             1200000, // 7
             1300000, // 8
             1400000, // 9
             1600000, // 10
+            1800000, // 11
+            2000000, // 12
+            2200000, // 13
+            2400000, // 14
+            2600000, // 15
+            2800000, // 16
+            3000000, // 17
         };
 
         /* MAKE SURE TO UPDATE THIS VALUE WITH EVERY MAJOR RELEASE BEFORE A FORK */
@@ -299,7 +330,7 @@ namespace CryptoNote
     };
 
     const size_t BLOCKS_IDS_SYNCHRONIZING_DEFAULT_COUNT = 10000; // by default, blocks ids count in synchronizing
-    const uint64_t BLOCKS_SYNCHRONIZING_DEFAULT_COUNT = 100; // by default, blocks count in blocks downloading
+    const uint64_t BLOCKS_SYNCHRONIZING_DEFAULT_COUNT = 20; // by default, blocks count in blocks downloading, recommended 20 for small coins
     const size_t COMMAND_RPC_GET_BLOCKS_FAST_MAX_COUNT = 1000;
 
     const int P2P_DEFAULT_PORT = 27092;
@@ -314,9 +345,9 @@ namespace CryptoNote
 
     // P2P Network Configuration Section - This defines our current P2P network version
     // and the minimum version for communication between nodes
-    const uint8_t P2P_CURRENT_VERSION = 6;
+    const uint8_t P2P_CURRENT_VERSION = 7;
 
-    const uint8_t P2P_MINIMUM_VERSION = 5;
+    const uint8_t P2P_MINIMUM_VERSION = 6;
 
     // This defines the minimum P2P version required for lite blocks propogation
     const uint8_t P2P_LITE_BLOCKS_PROPOGATION_VERSION = 4;
@@ -326,7 +357,7 @@ namespace CryptoNote
     const uint8_t P2P_UPGRADE_WINDOW = 2;
 
     const size_t P2P_CONNECTION_MAX_WRITE_BUFFER_SIZE = 32 * 1024 * 1024; // 32 MB
-    const uint32_t P2P_DEFAULT_CONNECTIONS_COUNT = 8;
+    const uint32_t P2P_DEFAULT_CONNECTIONS_COUNT = 16;
 
     const size_t P2P_DEFAULT_WHITELIST_CONNECTIONS_PERCENT = 70;
 
@@ -340,10 +371,15 @@ namespace CryptoNote
     const size_t P2P_DEFAULT_HANDSHAKE_INVOKE_TIMEOUT = 5000; // 5 seconds
     const char P2P_STAT_TRUSTED_PUB_KEY[] = "";
 
-    const uint64_t DATABASE_WRITE_BUFFER_MB_DEFAULT_SIZE = 256; // 256 MB
-    const uint64_t DATABASE_READ_BUFFER_MB_DEFAULT_SIZE = 128; // 128 MB
-    const uint32_t DATABASE_DEFAULT_MAX_OPEN_FILES = 125; // 125 files
-    const uint16_t DATABASE_DEFAULT_BACKGROUND_THREADS_COUNT = 4; // 4 DB threads
+    const uint64_t ROCKSDB_WRITE_BUFFER_MB = 256; // 256 MB
+    const uint64_t ROCKSDB_READ_BUFFER_MB = 128; // 128 MB
+    const uint64_t ROCKSDB_MAX_OPEN_FILES = 125; // 125 files
+    const uint64_t ROCKSDB_BACKGROUND_THREADS = 4; // 4 DB threads
+
+    const uint64_t LEVELDB_WRITE_BUFFER_MB = 64; // 64 MB
+    const uint64_t LEVELDB_READ_BUFFER_MB = 64; // 64 MB
+    const uint64_t LEVELDB_MAX_OPEN_FILES = 128; // 128 files
+    const uint64_t LEVELDB_MAX_FILE_SIZE_MB = 1024; // 1024MB = 1GB
 
     const char LATEST_VERSION_URL[] = "http://ticketszones.com";
 
@@ -356,6 +392,6 @@ namespace CryptoNote
          "140.82.58.153:27092",
          "140.82.21.218:27092",
          "207.246.114.46:27092",
-         "45.63.65.75:27092",
+         "45.63.65.75:27092"
     };
 } // namespace CryptoNote
